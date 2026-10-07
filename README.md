@@ -9,6 +9,7 @@ A collection of web-based projects built to solve practical problems across **st
 | **PlainSight** | A multi-page digital publication/news-style website with sections for national, international, sports, entertainment, editorials, and individual articles. | [Open PlainSight](https://shreya-aggarwal-1812.github.io/Workspace/) |
 | **Sekhani Pricing Simulator** | An interactive pricing decision engine that evaluates pricing decisions using factors such as order volume, complexity, batch size, urgency, customer relationship, capacity, and cost-to-serve. | [Open Pricing Simulator](https://shreya-aggarwal-1812.github.io/Workspace/sekhani-pricing-simulator/) |
 | **DSA Planner** | An AI-assisted academic planning tool designed to organize course attendance, session-wise cases/readings, and professor questions into a structured study workflow. | [Open DSA Planner](https://shreya-aggarwal-1812.github.io/Workspace/dsa-planner/) |
+| **AI Learning Hub** | A browser-based learning platform designed to organize and present learning resources through a simple interactive interface. | [Open AI Learning Hub](https://shreya-aggarwal-1812.github.io/Workspace/) |
 
 ---
 
@@ -84,6 +85,31 @@ Students often have academic information distributed across multiple sources—c
 
 ---
 
+## 4. AI Learning Hub
+
+The **AI Learning Hub** is a straightforward browser-based learning website designed to provide a centralized, interactive space for learning resources.
+
+### Key characteristics
+- Browser-based learning interface
+- Structured presentation of learning content
+- Interactive front-end experience
+- Designed to run directly in the browser without a server-side application
+- Built as a static website using **HTML, CSS, and JavaScript**
+
+### Technology
+
+The project uses a lightweight front-end architecture:
+
+- `index.html` — application structure and content
+- `styles.css` — interface styling
+- `app.js` — client-side interactions and application logic
+
+### Deployment
+
+The AI Learning Hub is packaged as `ai-learning-hub.zip` and deployed through the repository's GitHub Actions workflow. The workflow extracts the project files and publishes them through GitHub Pages.
+
+---
+
 ## Repository Structure
 
 ```text
@@ -116,10 +142,12 @@ The deployment workflow:
 ### Project paths
 
 ```text
-/                         → PlainSight
+/                           → PlainSight
 /sekhani-pricing-simulator/ → Sekhani Pricing Simulator
-/dsa-planner/             → DSA Planner
+/dsa-planner/               → DSA Planner
 ```
+
+The AI Learning Hub is also maintained in the repository as `ai-learning-hub.zip` and is deployable through the GitHub Pages workflow.
 
 ## Projects at a Glance
 
@@ -128,6 +156,7 @@ The deployment workflow:
 | PlainSight | Digital content presentation | Web development & content architecture |
 | Sekhani Pricing Simulator | Structured pricing decisions | Pricing strategy & decision modelling |
 | DSA Planner | Academic planning and information overload | AI-assisted productivity |
+| AI Learning Hub | Organizing learning resources | Front-end development & interactive learning |
 
 ---
 
