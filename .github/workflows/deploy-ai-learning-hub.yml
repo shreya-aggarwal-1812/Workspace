@@ -1,4 +1,4 @@
-name: Deploy PlainSight to GitHub Pages
+name: Deploy Projects to GitHub Pages
 
 on:
   push:
@@ -26,13 +26,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Prepare PlainSight site
+      - name: Prepare websites
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf _site /tmp/plainsight
-          mkdir -p _site /tmp/plainsight
+          rm -rf _site /tmp/plainsight /tmp/sekhani
+          mkdir -p _site /tmp/plainsight /tmp/sekhani
 
+          # -------------------------
+          # PlainSight
+          # -------------------------
           if [ -d "PlainSight" ]; then
             cp -R PlainSight/. _site/
           elif [ -f "PlainSight.zip" ]; then
@@ -43,13 +46,11 @@ jobs:
               cp -R /tmp/plainsight/. _site/
             fi
           else
-            echo "PlainSight project not found. Add PlainSight.zip or the PlainSight/ folder to the repository."
+            echo "PlainSight project not found."
             exit 1
           fi
 
           # PS.html is the real PlainSight homepage.
-          # Keep the original project files unchanged and make GitHub Pages
-          # open PS.html when visitors enter the site root.
           cat > _site/index.html <<'EOF'
           <!DOCTYPE html>
           <html lang="en">
@@ -64,6 +65,35 @@ jobs:
           </body>
           </html>
           EOF
+
+          # -------------------------
+          # Sekhani Pricing Simulator
+          # -------------------------
+          if [ -f "sekhani-pricing-simulator.zip" ]; then
+            unzip -q sekhani-pricing-simulator.zip -d /tmp/sekhani
+          else
+            echo "sekhani-pricing-simulator.zip not found."
+            exit 1
+          fi
+
+          mkdir -p _site/sekhani-pricing-simulator
+
+          # Preserve the simulator's original folder structure. If the ZIP
+          # contains a single top-level project folder, copy its contents;
+          # otherwise copy the extracted contents directly.
+          if [ -d "/tmp/sekhani/sekhani-pricing-simulator" ]; then
+            cp -R /tmp/sekhani/sekhani-pricing-simulator/. _site/sekhani-pricing-simulator/
+          else
+            top_level_dirs=(/tmp/sekhani/*/)
+            if [ "${#top_level_dirs[@]}" -eq 1 ] && [ -f "${top_level_dirs[0]}index.html" ]; then
+              cp -R "${top_level_dirs[0]}". _site/sekhani-pricing-simulator/
+            else
+              cp -R /tmp/sekhani/. _site/sekhani-pricing-simulator/
+            fi
+          fi
+
+          # If the simulator has an index.html, GitHub Pages will serve it at:
+          # /Workspace/sekhani-pricing-simulator/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
