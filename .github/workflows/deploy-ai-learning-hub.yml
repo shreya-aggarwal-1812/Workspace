@@ -30,8 +30,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf _site /tmp/plainsight /tmp/sekhani
-          mkdir -p _site /tmp/plainsight /tmp/sekhani
+          rm -rf _site /tmp/plainsight /tmp/sekhani /tmp/dsa
+          mkdir -p _site /tmp/plainsight /tmp/sekhani /tmp/dsa
 
           # -------------------------
           # PlainSight
@@ -50,7 +50,6 @@ jobs:
             exit 1
           fi
 
-          # PS.html is the real PlainSight homepage.
           cat > _site/index.html <<'EOF'
           <!DOCTYPE html>
           <html lang="en">
@@ -78,9 +77,6 @@ jobs:
 
           mkdir -p _site/sekhani-pricing-simulator
 
-          # Preserve the simulator's original folder structure. If the ZIP
-          # contains a single top-level project folder, copy its contents;
-          # otherwise copy the extracted contents directly.
           if [ -d "/tmp/sekhani/sekhani-pricing-simulator" ]; then
             cp -R /tmp/sekhani/sekhani-pricing-simulator/. _site/sekhani-pricing-simulator/
           else
@@ -92,8 +88,27 @@ jobs:
             fi
           fi
 
-          # If the simulator has an index.html, GitHub Pages will serve it at:
-          # /Workspace/sekhani-pricing-simulator/
+          # -------------------------
+          # DSA Planner
+          # -------------------------
+          if [ -f "DSA.zip" ]; then
+            unzip -q DSA.zip -d /tmp/dsa
+          else
+            echo "DSA.zip not found."
+            exit 1
+          fi
+
+          mkdir -p _site/dsa-planner
+
+          # DSA.zip contains a top-level DSA/ folder.
+          if [ -d "/tmp/dsa/DSA" ]; then
+            cp -R /tmp/dsa/DSA/. _site/dsa-planner/
+          else
+            cp -R /tmp/dsa/. _site/dsa-planner/
+          fi
+
+          # The planner's frontend is index.html, so it will be served at:
+          # /Workspace/dsa-planner/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
