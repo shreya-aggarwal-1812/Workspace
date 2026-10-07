@@ -9,7 +9,7 @@ A collection of web-based projects built to solve practical problems across **st
 | **PlainSight** | A multi-page digital publication/news-style website with sections for national, international, sports, entertainment, editorials, and individual articles. | [Open PlainSight](https://shreya-aggarwal-1812.github.io/Workspace/) |
 | **Sekhani Pricing Simulator** | An interactive pricing decision engine that evaluates pricing decisions using factors such as order volume, complexity, batch size, urgency, customer relationship, capacity, and cost-to-serve. | [Open Pricing Simulator](https://shreya-aggarwal-1812.github.io/Workspace/sekhani-pricing-simulator/) |
 | **DSA Planner** | An AI-assisted academic planning tool designed to organize course attendance, session-wise cases/readings, and professor questions into a structured study workflow. | [Open DSA Planner](https://shreya-aggarwal-1812.github.io/Workspace/dsa-planner/) |
-| **AI Learning Hub** | A browser-based learning platform designed to organize and present learning resources through a simple interactive interface. | Included in repository |
+| **AI Learning Hub** | A browser-based learning platform designed to organize and present learning resources through a simple interactive interface. | [Open AI Learning Hub](https://shreya-aggarwal-1812.github.io/Workspace/ai-learning-hub/) |
 
 ---
 
@@ -87,13 +87,13 @@ Students often have academic information distributed across multiple sources—c
 
 ## 4. AI Learning Hub
 
-The **AI Learning Hub** is a straightforward browser-based learning website designed to provide a centralized, interactive space for learning resources.
+The **AI Learning Hub** is a browser-based learning platform designed to provide a centralized, interactive space for learning resources.
 
 ### Key characteristics
 - Browser-based learning interface
 - Structured presentation of learning content
 - Interactive front-end experience
-- Designed to run directly in the browser without a server-side application
+- Designed to run directly in the browser
 - Built as a static website using **HTML, CSS, and JavaScript**
 
 ### Technology
@@ -106,7 +106,9 @@ The project uses a lightweight front-end architecture:
 
 ### Deployment
 
-The AI Learning Hub is packaged as `ai-learning-hub.zip` in the repository. It is configured for GitHub Pages deployment through the repository's GitHub Actions workflow.
+The AI Learning Hub is packaged as `ai-learning-hub.zip` and deployed at:
+
+**[Open AI Learning Hub](https://shreya-aggarwal-1812.github.io/Workspace/ai-learning-hub/)**
 
 ---
 
@@ -145,9 +147,8 @@ The deployment workflow:
 /                           → PlainSight
 /sekhani-pricing-simulator/ → Sekhani Pricing Simulator
 /dsa-planner/               → DSA Planner
+/ai-learning-hub/           → AI Learning Hub
 ```
-
-The AI Learning Hub is maintained in the repository as `ai-learning-hub.zip`.
 
 ## Projects at a Glance
 
