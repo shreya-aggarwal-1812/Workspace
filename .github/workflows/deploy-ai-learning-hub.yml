@@ -30,8 +30,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf _site /tmp/plainsight /tmp/sekhani /tmp/dsa
-          mkdir -p _site /tmp/plainsight /tmp/sekhani /tmp/dsa
+          rm -rf _site /tmp/plainsight /tmp/sekhani /tmp/dsa /tmp/ai-learning-hub
+          mkdir -p _site /tmp/plainsight /tmp/sekhani /tmp/dsa /tmp/ai-learning-hub
 
           # -------------------------
           # PlainSight
@@ -100,15 +100,37 @@ jobs:
 
           mkdir -p _site/dsa-planner
 
-          # DSA.zip contains a top-level DSA/ folder.
           if [ -d "/tmp/dsa/DSA" ]; then
             cp -R /tmp/dsa/DSA/. _site/dsa-planner/
           else
             cp -R /tmp/dsa/. _site/dsa-planner/
           fi
 
-          # The planner's frontend is index.html, so it will be served at:
-          # /Workspace/dsa-planner/
+          # -------------------------
+          # AI Learning Hub
+          # -------------------------
+          if [ -f "ai-learning-hub.zip" ]; then
+            unzip -q ai-learning-hub.zip -d /tmp/ai-learning-hub
+          else
+            echo "ai-learning-hub.zip not found."
+            exit 1
+          fi
+
+          mkdir -p _site/ai-learning-hub
+
+          if [ -d "/tmp/ai-learning-hub/ai-learning-hub" ]; then
+            cp -R /tmp/ai-learning-hub/ai-learning-hub/. _site/ai-learning-hub/
+          else
+            top_level_dirs=(/tmp/ai-learning-hub/*/)
+            if [ "${#top_level_dirs[@]}" -eq 1 ] && [ -f "${top_level_dirs[0]}index.html" ]; then
+              cp -R "${top_level_dirs[0]}". _site/ai-learning-hub/
+            else
+              cp -R /tmp/ai-learning-hub/. _site/ai-learning-hub/
+            fi
+          fi
+
+          # AI Learning Hub will be served at:
+          # /Workspace/ai-learning-hub/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
