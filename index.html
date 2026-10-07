@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Evolution & Agentic Playground</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- SVG Gradients used for pioneer avatars -->
+    <svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="indigoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f7022a" />
+                <stop offset="100%" stop-color="#fda4af" />
+            </linearGradient>
+            <linearGradient id="fuchsiaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#be123c" />
+                <stop offset="100%" stop-color="#f472b6" />
+            </linearGradient>
+            <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#e11d48" />
+                <stop offset="100%" stop-color="#fda4af" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Interactive Onboarding Tour Overlay -->
+    <div class="tour-overlay" id="tour-overlay" style="display: none;">
+        <div class="glass-card tour-modal">
+            <span class="welcome-badge">INTERACTIVE TOUR</span>
+            <h3 id="tour-title">Welcome to the AI Playground!</h3>
+            <p id="tour-desc">This interactive guide will walk you through the primary sections of this portal.</p>
+            <div class="tour-footer">
+                <button class="btn btn-secondary" id="tour-skip">Skip Tour</button>
+                <button class="btn" id="tour-next">Next Step &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation (Top Bar) -->
+    <header>
+        <div class="nav-container">
+            <div class="logo" id="logo-brand">
+                <div class="logo-icon">AG</div>
+                AI Agentic Playground
+            </div>
+            <div class="header-right">
+                <div class="search-box-wrapper" id="search-box-guide">
+                    <input type="text" id="global-search" placeholder="Type to search active page...">
+                </div>
+                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+                <nav class="nav-tabs" id="top-nav-guide">
+                    <button class="tab-btn active" data-tab="news">AI News Feed</button>
+                    <button class="tab-btn" data-tab="glossary">Glossary & MCP</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Floating Bottom Navigation Dock -->
+    <div class="bottom-nav" id="bottom-nav-guide">
+        <button class="tab-btn" data-tab="dashboard">Dashboard</button>
+        <button class="tab-btn" data-tab="timeline">Evolution</button>
+        <button class="tab-btn" data-tab="compare">LLM vs Agent</button>
+        <button class="tab-btn" data-tab="sectors">AI in Sectors</button>
+        <button class="tab-btn" data-tab="sandbox">Agent Sandbox</button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main>
+        
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="dashboard" class="view-section">
+            <div class="hero-grid">
+                <div class="glass-card hero-card">
+                    <span class="welcome-badge">SYSTEMS UPDATED</span>
+                    <h1>Learn AI & <span class="gradient-text">Agentic Architecture</span> in Real-Time</h1>
+                    <p>Welcome! This interactive playground is designed to teach you the fundamentals of modern Artificial Intelligence, the transition from static LLMs to goal-driven autonomous Agents, and how standards like the Model Context Protocol (MCP) enable models to control tools.</p>
+                    <p>Explore the timeline, check company integrations across 12 industries, or run simulated agents in the Sandbox environment!</p>
+                </div>
+                <div class="glass-card" style="display: flex; flex-direction: column; justify-content: center;">
+                    <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Quick Core Concepts</h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li>🚀 <strong>LLM:</strong> Large Language Model predicting text/code.</li>
+                        <li>🤖 <strong>AI Agent:</strong> LLM wrapped in a run loop with tool access.</li>
+                        <li>🔄 <strong>Agentic AI:</strong> Systems exhibiting multi-step autonomy.</li>
+                        <li>🔌 <strong>MCP:</strong> Open standard connecting LLMs to data & tools.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="glass-card feature-item" data-goto="timeline">
+                    <div class="feature-icon">⏳</div>
+                    <h3>AI Evolution & Pioneers</h3>
+                    <p>Trace AI history and learn about Turing Award winners, developers, and highly viewed video guides.</p>
+                    <span style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">View Timeline &rarr;</span>
+                </div>
+                <div class="glass-card feature-item" data-goto="sectors">
+                    <div class="feature-icon">🏢</div>
+                    <h3>AI in Sectors</h3>
+                    <p>Analyze how 12 sectors around the world are integrating AI with real-world case studies.</p>
+                    <span style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Check Sectors &rarr;</span>
+                </div>
+                <div class="glass-card feature-item" data-goto="news">
+                    <div class="feature-icon">📰</div>
+                    <h3>AI News & Uploads</h3>
+                    <p>Browse top AI news, or upload/paste a newspaper file to parse and append headlines in real-time.</p>
+                    <span style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Browse News &rarr;</span>
+                </div>
+                <div class="glass-card feature-item" data-goto="sandbox">
+                    <div class="feature-icon">🧪</div>
+                    <h3>Agent Sandbox</h3>
+                    <p>Run simulated agent run-loops. Watch them think, select tools, and verify facts.</p>
+                    <span style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Run Simulator &rarr;</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. TIMELINE VIEW -->
+        <section id="timeline" class="view-section">
+            <div class="glass-card">
+                <h2>The Evolution of AI</h2>
+                <p>AI did not happen overnight. Explore the major historical epochs that transitioned technology from hardcoded logic to reasoning agent systems.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">1950s - 1980s</div>
+                    <div class="timeline-content">
+                        <h3>Symbolic AI & Expert Systems</h3>
+                        <p>Early AI was rule-based. Developers wrote complex logic trees (if-then statements) to mimic human expertise (e.g., chess algorithms). It was rigid and could not learn or adapt on its own.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">1990s - 2010s</div>
+                    <div class="timeline-content">
+                        <h3>Machine Learning Expansion</h3>
+                        <p>Instead of hardcoding rules, developers trained algorithms (like Decision Trees and SVMs) on datasets to discover patterns. This era introduced modern spam filters, recommendation systems, and data-driven statistics.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2012 - 2017</div>
+                    <div class="timeline-content">
+                        <h3>Deep Learning & Neural Networks</h3>
+                        <p>Powered by GPUs and massive datasets, Deep Neural Networks (DL) enabled computers to recognize images, translate speech, and beat human champions at Go (AlphaGo). The core structure shifted to layers of virtual neurons.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2017 - 2022</div>
+                    <div class="timeline-content">
+                        <h3>Transformers & LLMs</h3>
+                        <p>The "Transformer" neural network architecture (2017) introduced self-attention, processing entire documents in parallel. This enabled the development of Large Language Models (LLMs) like GPT and Gemini, which predict human-like language.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023 - Present</div>
+                    <div class="timeline-content">
+                        <h3>AI Agents & Agentic Loops</h3>
+                        <p>The transition from conversational prompts to self-driven actions. Models are wrapped in loops that let them browse the web, edit files, and self-correct. They operate as autonomous entities executing complex, multi-step tasks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Pioneers Sub-section -->
+            <div class="pioneers-section">
+                <h2>Prominent Figures in AI Evolution</h2>
+                <p>Meet the visionary researchers and builders who pushed computing from basic mathematical theory to autonomous agent networks.</p>
+                <div class="pioneers-grid" id="pioneers-grid">
+                    <!-- Dynamically populated by app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. COMPARE VIEW -->
+        <section id="compare" class="view-section">
+            <div class="glass-card">
+                <h2>LLM vs. AI Agent vs. Agentic AI</h2>
+                <p>These terms are often used interchangeably, but they represent very different levels of capability and autonomy. Here is how they stack up:</p>
+            </div>
+
+            <div class="matrix-container">
+                <!-- Column 1: LLM -->
+                <div class="glass-card matrix-card llm">
+                    <span class="matrix-badge">Level 1: The Brain</span>
+                    <h2>Large Language Model</h2>
+                    <p>A static model that takes text inputs and predicts the next words to generate a response.</p>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">&#10003;</span> <strong>Autonomy:</strong> Zero. Fully dependent on immediate user prompt.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Action:</strong> Only outputs text or code; cannot perform actions.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Memory:</strong> Session-only context window; resets every chat.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Tools:</strong> None, unless embedded into an agent host.</li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: AI Agent -->
+                <div class="glass-card matrix-card agent">
+                    <span class="matrix-badge">Level 2: Hands & Feet</span>
+                    <h2>AI Agent</h2>
+                    <p>An LLM combined with external tools and a loop to accomplish basic, immediate instructions.</p>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">&#10003;</span> <strong>Autonomy:</strong> Medium. Decides when to invoke tools.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Action:</strong> Can run commands, search web, edit files.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Memory:</strong> Short-term session memory + vector search RAG.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Tools:</strong> Integrates specific APIs to read/write data.</li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Agentic AI -->
+                <div class="glass-card matrix-card agentic">
+                    <span class="matrix-badge">Level 3: Full Autopilot</span>
+                    <h2>Agentic AI</h2>
+                    <p>Sophisticated multi-agent networks operating on long-term loops with self-correction, planning, and goal tracking.</p>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">&#10003;</span> <strong>Autonomy:</strong> High. Explores avenues, tests, and self-corrects.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Action:</strong> Chains actions, spins up subagents, writes tests.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Memory:</strong> Ephemeral, vector-semantic, and long-term workspace.</li>
+                        <li><span class="check-icon">&#10003;</span> <strong>Tools:</strong> Dynamic MCP servers, sandbox environments.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SECTORS VIEW -->
+        <section id="sectors" class="view-section">
+            <div class="glass-card">
+                <h2>AI in Global Sectors</h2>
+                <p>Observe how various global industries integrate AI into their operational workflow, alongside the integration strength index and company case studies.</p>
+            </div>
+            
+            <div class="sectors-grid" id="sectors-grid">
+                <!-- Dynamically populated by app.js -->
+            </div>
+        </section>
+
+        <!-- 5. NEWS VIEW (Active by default) -->
+        <section id="news" class="view-section active">
+            <div class="glass-card">
+                <h2>Real-Time AI News Feed & Uploads</h2>
+                <p>Stay updated on major events across leading AI blogs and news outlets. Filter results or drag-and-drop local newspaper documents to parse them instantly!</p>
+            </div>
+
+            <div class="news-layout">
+                <!-- Left panel: upload newspaper / drag and drop -->
+                <div class="glass-card upload-panel" style="height: fit-content;" id="newspaper-panel-guide">
+                    <h3>Newspaper Import Hub</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-dark); margin-bottom: 1rem;">Import local text articles from your computer or copy-paste text below.</p>
+                    
+                    <!-- Drag and Drop Box -->
+                    <div class="dropzone" id="news-dropzone">
+                        <span class="dropzone-icon">📥</span>
+                        <p style="font-weight: 500; font-size: 0.95rem; margin-bottom: 0.25rem;">Drag & Drop Newspaper File</p>
+                        <p style="font-size: 0.8rem; color: var(--text-dark);">Only <strong>.txt</strong> text files accepted</p>
+                        <input type="file" id="news-file-input" accept=".txt" style="display: none;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="news-paste-area">Paste Article Text Instead</label>
+                        <textarea id="news-paste-area" rows="5" placeholder="First line will be treated as Headline&#10;&#10;Insert paragraph details here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="news-source-select">Select Source Attribution</label>
+                        <select id="news-source-select">
+                            <option value="AllBusiness.com">AllBusiness.com</option>
+                            <option value="TechCrunch (AI)">TechCrunch (AI)</option>
+                            <option value="Forbes (AI)">Forbes (AI)</option>
+                            <option value="Time.com">Time.com</option>
+                            <option value="OpenAI Blog">OpenAI Blog</option>
+                            <option value="Anthropic Research">Anthropic Research</option>
+                            <option value="Substack (AI Newsletters)">Substack Newsletters</option>
+                            <option value="MIT Technology Review">MIT Technology Review</option>
+                            <option value="Stanford HAI">Stanford HAI</option>
+                            <option value="The Batch (DeepLearning.AI)">The Batch</option>
+                            <option value="The Wall Street Journal">The Wall Street Journal</option>
+                            <option value="Hugging Face Blog">Hugging Face Blog</option>
+                            <option value="Google DeepMind Blog">Google DeepMind Blog</option>
+                            <option value="NVIDIA Technical Blog">NVIDIA Technical Blog</option>
+                            <option value="The Gradient">The Gradient</option>
+                        </select>
+                    </div>
+
+                    <button class="btn" id="news-paste-submit">Parse & Inject Article</button>
+                </div>
+
+                <!-- Right panel: scrolling articles grid -->
+                <div class="news-grid" id="news-grid">
+                    <!-- Dynamically populated by app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. SANDBOX VIEW -->
+        <section id="sandbox" class="view-section">
+            <div class="glass-card">
+                <h2>Agentic Sandbox</h2>
+                <p>Run simulated agent run-loops. Watch the agent execute a prompt using its reasoning chain, call tools, receive observations, and produce verified results.</p>
+            </div>
+
+            <div class="sandbox-layout">
+                <!-- Control Panel -->
+                <div class="glass-card control-panel" id="agent-config-guide">
+                    <h3>Configure Agent</h3>
+                    
+                    <div class="form-group">
+                        <label for="agent-template">Select Agent Profile</label>
+                        <select id="agent-template">
+                            <option value="factchecker">Fact Checker & Source Provider</option>
+                            <option value="researcher">Web Search Research Agent</option>
+                            <option value="debugger">Code Debugger Agent</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="system-prompt">System Prompt</label>
+                        <textarea id="system-prompt" rows="4" readonly></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Active Tools Enabled</label>
+                        <div class="tools-selector">
+                            <input type="checkbox" id="tool-search" value="web_search" class="tool-checkbox">
+                            <label for="tool-search" class="tool-label">🌐 Web Search</label>
+                            
+                            <input type="checkbox" id="tool-db" value="fact_db_check" class="tool-checkbox">
+                            <label for="tool-db" class="tool-label">🗄️ Fact DB Check</label>
+                            
+                            <input type="checkbox" id="tool-source" value="source_verifier" class="tool-checkbox">
+                            <label for="tool-source" class="tool-label">🔍 Source Verifier</label>
+                            
+                            <input type="checkbox" id="tool-code" value="code_interpreter" class="tool-checkbox">
+                            <label for="tool-code" class="tool-label">💻 Code Interpreter</label>
+                        </div>
+                    </div>
+
+                    <button class="btn" id="run-simulation">Run Agent Simulation</button>
+                </div>
+
+                <!-- Simulation Output -->
+                <div class="glass-card simulation-panel">
+                    <div class="panel-header">
+                        <h3>Agent Execution Console</h3>
+                        <div class="status-indicator">
+                            Status: <span class="status-dot idle" id="status-dot"></span> <strong id="status-text">IDLE</strong>
+                        </div>
+                    </div>
+                    <div class="console-output" id="console-output">
+                        <div class="log-entry system">[SYSTEM] Console idle. Choose an agent profile and click "Run Agent Simulation" above.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tokenizer Simulator visualizer box -->
+            <div class="glass-card" style="margin-top: 2rem;" id="tokenizer-guide">
+                <h3>Interactive Tokenizer Visualizer</h3>
+                <p>Large Language Models (like GPT or Gemini) don't read words. They split text into smaller chunks called <strong>Tokens</strong>, translate them into numerical IDs, and project them into an <strong>Embedding</strong> vector space. Test it below!</p>
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label for="tokenizer-input">Enter text to tokenize</label>
+                    <input type="text" id="tokenizer-input" value="GPT models use self-attention to read patterns." style="width: 100%;">
+                </div>
+                <button class="btn" id="btn-tokenize" style="margin-top: 1rem;">Tokenize Text</button>
+                
+                <div class="token-results" id="token-results" style="display: none; margin-top: 1.5rem; border-top: 1px dashed var(--border-color); padding-top: 1.5rem;">
+                    <div class="form-group">
+                        <label>Tokenized Output (Color-coded chunks)</label>
+                        <div class="token-chips" id="token-chips"></div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; margin-top: 1rem;">
+                        <div class="glass-card" style="padding: 1rem; margin-bottom: 0; background: rgba(0,0,0,0.15);">
+                            <h4 style="font-size: 0.9rem; color: var(--accent); margin-bottom: 0.5rem;">Stats</h4>
+                            <p style="font-size: 0.85rem; margin-bottom: 0.25rem;">Token Count: <strong id="token-count" style="color: white;">0</strong></p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0;">Character Count: <strong id="char-count" style="color: white;">0</strong></p>
+                        </div>
+                        <div class="glass-card" style="padding: 1rem; margin-bottom: 0; background: rgba(0,0,0,0.15); font-family: var(--font-code); font-size: 0.8rem; overflow-x: auto;">
+                            <h4 style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem; font-family: var(--font-heading);">Mock 5D Vector Embedding</h4>
+                            <div id="vector-embedding" style="color: var(--text-muted);">[0.0, 0.0, 0.0, 0.0, 0.0]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. GLOSSARY & MCP VIEW -->
+        <section id="glossary" class="view-section">
+            <div class="glass-card">
+                <h2>Model Context Protocol & Glossary</h2>
+                <p>Explore critical vocabulary defining the AI ecosystem, and interact with the diagram below to understand Model Context Protocol (MCP) integration.</p>
+                
+                <!-- MCP Flow Visualizer -->
+                <div class="mcp-diagram" id="mcp-diagram-guide">
+                    <h3 style="margin-bottom: 0.5rem; text-align: center;">Model Context Protocol (MCP) Visual Architecture</h3>
+                    <p style="font-size: 0.9rem; text-align: center; color: var(--text-muted); margin-bottom: 1rem;">Click any node to inspect its role in the system.</p>
+                    
+                    <div class="diagram-row">
+                        <div class="diagram-node" data-role="host" id="node-host">
+                            <h5>Host App</h5>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Antigravity IDE / Chat Canvas</span>
+                        </div>
+                        <div class="diagram-arrow pulse-flow">
+                            <span>&harr;</span>
+                            <span class="diagram-arrow-text">JSON-RPC</span>
+                        </div>
+                        <div class="diagram-node" data-role="client" id="node-client">
+                            <h5>MCP Client</h5>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Connection Coordinator</span>
+                        </div>
+                        <div class="diagram-arrow pulse-flow">
+                            <span>&harr;</span>
+                            <span class="diagram-arrow-text">Tools / Resources</span>
+                        </div>
+                        <div class="diagram-node" data-role="server" id="node-server">
+                            <h5>MCP Server</h5>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Git / Shell / Local Files</span>
+                        </div>
+                    </div>
+                    
+                    <div id="mcp-details-card" class="glass-card" style="margin: 1.5rem 0 0 0; padding: 1.25rem; border-color: rgba(247, 2, 42, 0.2);">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Select a component above</h4>
+                        <p style="font-size: 0.95rem; margin-bottom: 0;">Click on Host App, MCP Client, or MCP Server in the diagram to view its details.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vocabulary Grid -->
+            <div class="glossary-grid" id="glossary-grid">
+                <!-- Dynamically loaded from app.js -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AI Agentic Playground. Powered by Google Antigravity.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
