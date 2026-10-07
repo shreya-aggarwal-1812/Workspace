@@ -1,4 +1,4 @@
-name: Deploy AI Learning Hub to GitHub Pages
+name: Deploy PlainSight to GitHub Pages
 
 on:
   push:
@@ -25,14 +25,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Prepare static site
+      - name: Prepare PlainSight site
         run: |
           rm -rf _site
           mkdir -p _site
-          unzip -q ai-learning-hub.zip -d /tmp/ai-learning-hub
-          cp -R /tmp/ai-learning-hub/ai-learning-hub/. _site/
+          cp -R PlainSight/. _site/
 
-      # Initialize the Pages site automatically if it has not been enabled yet.
+          # GitHub Pages serves index.html by default. PlainSight's real homepage
+          # is PS.html, so provide a root redirect without changing the project.
+          cat > _site/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="refresh" content="0; url=PS.html">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>PlainSight</title>
+          </head>
+          <body>
+            <p>Opening <a href="PS.html">PlainSight</a>...</p>
+          </body>
+          </html>
+          EOF
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
