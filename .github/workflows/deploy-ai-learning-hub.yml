@@ -32,6 +32,7 @@ jobs:
           unzip -q ai-learning-hub.zip -d /tmp/ai-learning-hub
           cp -R /tmp/ai-learning-hub/ai-learning-hub/. _site/
 
+      # Initialize the Pages site automatically if it has not been enabled yet.
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
