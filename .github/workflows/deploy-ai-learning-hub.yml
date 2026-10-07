@@ -21,18 +21,35 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
       - name: Prepare PlainSight site
+        shell: bash
         run: |
-          rm -rf _site
-          mkdir -p _site
-          cp -R PlainSight/. _site/
+          set -euo pipefail
+          rm -rf _site /tmp/plainsight
+          mkdir -p _site /tmp/plainsight
 
-          # GitHub Pages serves index.html by default. PlainSight's real homepage
-          # is PS.html, so provide a root redirect without changing the project.
+          if [ -d "PlainSight" ]; then
+            cp -R PlainSight/. _site/
+          elif [ -f "PlainSight.zip" ]; then
+            unzip -q PlainSight.zip -d /tmp/plainsight
+            if [ -d "/tmp/plainsight/PlainSight" ]; then
+              cp -R /tmp/plainsight/PlainSight/. _site/
+            else
+              cp -R /tmp/plainsight/. _site/
+            fi
+          else
+            echo "PlainSight project not found. Add PlainSight.zip or the PlainSight/ folder to the repository."
+            exit 1
+          fi
+
+          # PS.html is the real PlainSight homepage.
+          # Keep the original project files unchanged and make GitHub Pages
+          # open PS.html when visitors enter the site root.
           cat > _site/index.html <<'EOF'
           <!DOCTYPE html>
           <html lang="en">
@@ -43,7 +60,7 @@ jobs:
             <title>PlainSight</title>
           </head>
           <body>
-            <p>Opening <a href="PS.html">PlainSight</a>...</p>
+            <a href="PS.html">Open PlainSight</a>
           </body>
           </html>
           EOF
